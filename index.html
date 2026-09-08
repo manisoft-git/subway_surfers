@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Subway Surfers 3D: Rail Rush</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="game-container"></div>
+
+    <!-- HUD Overlay -->
+    <div id="hud" style="display: none;">
+        <div class="hud-top-bar">
+            <div class="hud-left-controls">
+                <button id="pause-btn" class="icon-btn" title="Pause">⏸</button>
+                <button id="audio-toggle-btn" class="icon-btn" title="Mute / Unmute">🔊</button>
+            </div>
+
+            <!-- Daily Word Hunt: S-U-R-F -->
+            <div id="word-hunt" class="word-hunt-container">
+                <div id="letter-s" class="word-letter">S</div>
+                <div id="letter-u" class="word-letter">U</div>
+                <div id="letter-r" class="word-letter">R</div>
+                <div id="letter-f" class="word-letter">F</div>
+            </div>
+
+            <!-- Score and Coins -->
+            <div class="hud-right-stats">
+                <div class="stat-pill coins-pill">
+                    <span class="coin-icon">🪙</span>
+                    <span id="hud-coins-val" class="coins-count">0</span>
+                </div>
+                <div class="score-box">
+                    <div id="hud-score-val" class="score-main">0</div>
+                    <div class="score-details">
+                        <span id="hud-multiplier" class="multiplier-badge">1x</span>
+                        <span class="highscore-label">BEST: <span id="hud-highscore-val">0</span></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Active Power-up Timers Stack -->
+        <div id="powerup-timers" class="powerup-timers-stack"></div>
+
+        <!-- Mobile Touch Controls (D-Pad) -->
+        <div id="mobile-dpad" class="mobile-controls">
+            <div class="dpad-group">
+                <button id="btn-left" class="touch-action-btn">◀</button>
+                <button id="btn-right" class="touch-action-btn">▶</button>
+            </div>
+            <div class="dpad-group">
+                <button id="btn-board" class="touch-action-btn board-btn">🛹</button>
+                <button id="btn-jump" class="touch-action-btn">▲</button>
+                <button id="btn-slide" class="touch-action-btn">▼</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Start / Title Screen -->
+    <div id="start-screen" class="modal-overlay">
+        <h1 class="banner-title">SUBWAY SURFERS</h1>
+        <div class="banner-subtitle">RAIL RUSH 3D</div>
+
+        <div class="card-container">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-title">High Score</div>
+                    <div id="title-highscore" class="stat-value">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-title">Gold Coins</div>
+                    <div id="title-coins" class="stat-value">0</div>
+                </div>
+            </div>
+
+            <div id="missions-overview" class="missions-overview-box"></div>
+
+            <button id="start-btn" class="cta-btn">🏄 TAP TO SURF</button>
+            <button id="open-shop-btn" class="secondary-btn">🛒 SHOP & UPGRADES</button>
+
+            <div class="controls-hint">
+                <strong>PC Controls:</strong> A / D / Arrows = Dodge Lanes<br>
+                W / Up = Jump • S / Down = Slide • Space = Hoverboard<br>
+                <strong>Mobile:</strong> Swipe Left/Right/Up/Down • Double Tap for Board
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Over Screen -->
+    <div id="game-over-modal" class="modal-overlay" style="display: none;">
+        <h1 class="banner-title" style="background: linear-gradient(180deg, #ff4757 0%, #ff6b81 100%);">BUSTED!</h1>
+
+        <div class="card-container">
+            <div id="new-best-badge" class="new-best-ribbon" style="display: none;">★ NEW BEST RECORD! ★</div>
+
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <div class="stat-title">Final Score</div>
+                    <div id="final-score" class="stat-value" style="color: #ffffff;">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-title">Coins Earned</div>
+                    <div id="final-coins" class="stat-value" style="color: #ffd32a;">+0</div>
+                </div>
+            </div>
+
+            <div class="stat-item" style="width: 100%;">
+                <div class="stat-title">Distance Traveled</div>
+                <div id="final-distance" class="stat-value" style="color: #00d2d3;">0m</div>
+            </div>
+
+            <button id="revive-btn" class="cta-btn revive-btn">🔑 REVIVE WITH KEY</button>
+            <button id="restart-btn" class="cta-btn">🔄 PLAY AGAIN</button>
+            <button id="gameover-shop-btn" class="secondary-btn">🛒 SHOP & UPGRADES</button>
+        </div>
+    </div>
+
+    <!-- Shop & Upgrades Modal -->
+    <div id="shop-modal" class="modal-overlay" style="display: none;">
+        <div class="card-container shop-card">
+            <div class="shop-header">
+                <div class="shop-title">SUBWAY STORE</div>
+                <div class="stat-pill coins-pill">
+                    <span class="coin-icon">🪙</span>
+                    <span id="shop-coins-val" class="coins-count">0</span>
+                </div>
+            </div>
+
+            <!-- Shop Category Tabs -->
+            <div class="shop-tabs-bar">
+                <button class="shop-tab-btn active" data-tab="upgrades">UPGRADES</button>
+                <button class="shop-tab-btn" data-tab="characters">CHARACTERS</button>
+                <button class="shop-tab-btn" data-tab="boards">BOARDS</button>
+                <button class="shop-tab-btn" data-tab="missions">MISSIONS</button>
+            </div>
+
+            <!-- Tab Content Dynamic Area -->
+            <div id="shop-content-area" class="upgrades-container"></div>
+
+            <button id="close-shop-btn" class="cta-btn" style="background: #2f3542;">✓ BACK TO GAME</button>
+        </div>
+    </div>
+
+    <!-- Mystery Box Modal -->
+    <div id="mystery-box-modal" class="modal-overlay" style="display: none;">
+        <div class="card-container mystery-card">
+            <div id="box-reward-content" class="mystery-reward-box"></div>
+            <button id="claim-box-btn" class="cta-btn">AWESOME!</button>
+        </div>
+    </div>
+
+    <!-- Scripts in Dependency Order -->
+    <script src="vendor/three.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script src="js/textures.js"></script>
+    <script src="js/models.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/player.js"></script>
+    <script src="js/inspector.js"></script>
+    <script src="js/world.js"></script>
+    <script src="js/missions.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
