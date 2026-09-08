@@ -4,7 +4,7 @@ import socketserver
 import os
 import sys
 
-PORT = 8082
+PORT = int(os.environ.get("PORT", 8082))
 
 class GameHTTPRequestHandler(http.server.SimpleHTTPRequestHandler):
     extensions_map = {
