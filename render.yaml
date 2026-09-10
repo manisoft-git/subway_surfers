@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: manisoft-subway-surfers
+    runtime: python
+    plan: free
+    region: oregon
+    buildCommand: "echo Subway Surfers ready"
+    startCommand: "python3 server.py"
+    envVars:
+      - key: PORT
+        value: 10000
