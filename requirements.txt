@@ -1,0 +1,2 @@
+# Subway Surfers Web Game Server
+# Built-in standard library http.server - zero external dependencies required
