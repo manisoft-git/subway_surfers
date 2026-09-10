@@ -295,14 +295,16 @@ html, body {
     backdrop-filter: blur(6px);
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     z-index: 30;
-    padding: 20px;
+    padding: max(16px, env(safe-area-inset-top)) 16px max(16px, env(safe-area-inset-bottom)) 16px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .banner-title {
-    font-size: clamp(38px, 8vw, 68px);
+    font-size: clamp(32px, 8vw, 68px);
     font-weight: 900;
     text-align: center;
     letter-spacing: 1px;
@@ -312,6 +314,7 @@ html, body {
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 6px 0 #1e272e) drop-shadow(0 10px 20px rgba(255, 159, 26, 0.4));
     margin-bottom: 8px;
+    margin-top: auto;
 }
 
 .banner-subtitle {
@@ -319,7 +322,7 @@ html, body {
     color: #00f3ff;
     letter-spacing: 4px;
     text-transform: uppercase;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
     text-shadow: 0 2px 8px rgba(0, 243, 255, 0.6);
 }
 
@@ -335,6 +338,7 @@ html, body {
     flex-direction: column;
     gap: 16px;
     align-items: center;
+    margin-bottom: auto;
 }
 
 .stats-grid {
@@ -684,4 +688,193 @@ html, body {
     color: #ffffff;
     font-weight: bold;
 }
+
+/* --------------------------------------------------------------------------
+   Mobile Phone Responsive Ergonomics (< 640px and < 420px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 640px) {
+    .hud-top-bar {
+        top: max(10px, env(safe-area-inset-top));
+        left: max(10px, env(safe-area-inset-left));
+        right: max(10px, env(safe-area-inset-right));
+    }
+
+    .icon-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+        border-width: 2px;
+    }
+
+    .word-hunt-container {
+        padding: 4px 10px;
+        gap: 5px;
+    }
+
+    .word-letter {
+        width: 26px;
+        height: 30px;
+        font-size: 16px;
+        border-radius: 6px;
+    }
+
+    .stat-pill {
+        padding: 4px 10px;
+        gap: 6px;
+    }
+
+    .coin-icon {
+        font-size: 16px;
+    }
+
+    .coins-count {
+        font-size: 18px;
+    }
+
+    .score-main {
+        font-size: 26px;
+    }
+
+    .multiplier-badge {
+        padding: 1px 6px;
+        font-size: 11px;
+    }
+
+    .highscore-label {
+        font-size: 11px;
+    }
+
+    .powerup-timers-stack {
+        top: 65px;
+        left: 10px;
+        gap: 8px;
+    }
+
+    .powerup-icon {
+        width: 28px;
+        height: 28px;
+        font-size: 15px;
+    }
+
+    .powerup-progress-track {
+        width: 60px;
+        height: 10px;
+    }
+
+    .mobile-controls {
+        bottom: max(14px, env(safe-area-inset-bottom));
+        padding: 0 max(12px, env(safe-area-inset-left));
+    }
+
+    .touch-action-btn {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        font-size: 20px;
+    }
+
+    .dpad-group {
+        gap: 8px;
+    }
+
+    .card-container {
+        padding: 18px 14px;
+        border-radius: 18px;
+        gap: 12px;
+        max-width: 95vw;
+    }
+
+    .banner-title {
+        font-size: clamp(28px, 9vw, 44px);
+    }
+
+    .banner-subtitle {
+        font-size: 13px;
+        letter-spacing: 2.5px;
+        margin-bottom: 14px;
+    }
+
+    .cta-btn {
+        font-size: 18px;
+        padding: 12px;
+        border-radius: 14px;
+    }
+
+    .secondary-btn {
+        font-size: 15px;
+        padding: 10px;
+        border-radius: 12px;
+    }
+
+    .controls-hint {
+        font-size: 11px;
+    }
+
+    .shop-card {
+        max-height: 88vh;
+        padding: 16px 12px;
+    }
+
+    .shop-title {
+        font-size: 20px;
+    }
+
+    .shop-tab-btn {
+        font-size: 11px;
+        padding: 8px 4px;
+    }
+
+    .shop-item-card {
+        padding: 10px 12px;
+    }
+
+    .shop-item-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 22px;
+    }
+
+    .shop-item-title {
+        font-size: 14px;
+    }
+
+    .shop-buy-btn {
+        padding: 6px 12px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 400px) {
+    .word-hunt-container {
+        gap: 3px;
+        padding: 3px 6px;
+    }
+
+    .word-letter {
+        width: 22px;
+        height: 26px;
+        font-size: 14px;
+    }
+
+    .hud-left-controls {
+        gap: 6px;
+    }
+
+    .icon-btn {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+    }
+
+    .touch-action-btn {
+        width: 46px;
+        height: 46px;
+        font-size: 18px;
+    }
+
+    .score-main {
+        font-size: 22px;
+    }
+}
+
 
