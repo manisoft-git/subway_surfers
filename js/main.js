@@ -246,7 +246,11 @@ class SubwaySurfersGame {
         this.player.invulnerableTimer = 3.0; // 3s revive shield
         this.player.y = 0.5;
         this.player.vy = 0;
+        this.player.isJumping = false;
+        this.player.isSliding = false;
+        this.inspector.isTackling = false;
         this.inspector.currentOffsetZ = 5.5; // push inspector back
+        this.inspector.targetOffsetZ = 5.8;
         this.ui.showHUD();
 
         if (window.soundManager) {
